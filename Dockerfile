@@ -3,10 +3,12 @@ FROM python:3.11
 WORKDIR /app
 
 COPY requirements.txt /app/
-RUN apt-get update && apt-get install -y build-essential && \
-    pip install --upgrade pip && \
-    pip install -r requirements.txt && \
-    apt-get clean && rm -rf /var/lib/apt/lists/*
+RUN apt-get update
+RUN apt-get install -y build-essential
+RUN pip install --upgrade pip
+COPY requirements.txt .
+RUN pip install -r requirements.txt
+RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
 COPY . /app/
 
