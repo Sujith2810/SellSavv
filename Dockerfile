@@ -10,7 +10,7 @@ COPY requirements.txt .
 
 # Install Python dependencies
 RUN pip install --upgrade pip
-RUN pip install -r requirements.txt
+RUN pip install -r requirements.txt || (echo "💥 Pip install failed. Contents of requirements.txt:" && cat requirements.txt)
 
 # Clean up
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
